@@ -1,20 +1,19 @@
 using Soenneker.Discord.HttpClients.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Discord.HttpClients.Tests;
 
-[Collection("Collection")]
-public sealed class DiscordOpenApiHttpClientTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class DiscordOpenApiHttpClientTests : HostedUnitTest
 {
     private readonly IDiscordOpenApiHttpClient _httpclient;
 
-    public DiscordOpenApiHttpClientTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public DiscordOpenApiHttpClientTests(Host host) : base(host)
     {
         _httpclient = Resolve<IDiscordOpenApiHttpClient>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
