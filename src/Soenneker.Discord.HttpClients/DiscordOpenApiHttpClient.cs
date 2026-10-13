@@ -30,7 +30,7 @@ public sealed class DiscordOpenApiHttpClient : IDiscordOpenApiHttpClient
     {
         return _httpClientCache.Get(_cacheKey, (config: _config, baseUrl: _config["Discord:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("Discord:ApiKey");
+            var apiKey = state.config.GetStringStrict("Discord:ApiKey");
             string authHeaderName = state.config["Discord:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["Discord:AuthHeaderValueTemplate"] ?? "Bot {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
